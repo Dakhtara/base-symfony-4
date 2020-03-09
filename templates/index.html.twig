@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        Vous êtes connecté en tant que {{ app.user.email }}.
+        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            Cet utilisateur est administrateur
+        {% else %}
+            Cet utilisateur n'est pas administrateur
+        {% endif %}
+    {% else %}
+        Vous n'êtes pas connecté.
+        <a href="{{ path('app_login') }}">Se connecter</a>
+    {% endif %}
+{% endblock %}
